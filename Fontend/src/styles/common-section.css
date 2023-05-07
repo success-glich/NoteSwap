@@ -1,0 +1,17 @@
+.common__section {
+    /* background: linear-gradient(rgba(0, 0, 0, 0.562), #000, url('../assets/images/common-section-bg.jpg')) no repeat center center; */
+    /* background: linear-gradient(rgba(0, 0, 0, 0.562), #000, url('../assets/images/common-section-bg.jpg')) no-repeat center center; */
+    background: #000 url('../assets/image/common__picture.jpg') no-repeat center center;
+    z-index: -1;
+    background-size: cover;
+    /* height: 350px; */
+    padding: 100px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.common__section h1 {
+    color: white;
+    font-weight: 600;
+}
