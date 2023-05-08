@@ -31,7 +31,7 @@ const NoteDetails = () => {
   const { id } = useParams();
   const [reviews, setReviews] = useState([]);
   const { isUserLoggedIn } = useSelector((state) => state.user);
-  const { note } = useSelector((state) => state.note);
+  const { note, isLoading } = useSelector((state) => state.note);
 
   const addToCart = () => {
     toast.success("Note added to favorite");
@@ -94,17 +94,15 @@ const NoteDetails = () => {
   };
 
   useEffect(() => {}, [note]);
-  const {
-    title = "Notes",
-    imgUrl,
-    fileUrl,
-    category: { title: categoryTitle },
-    description: shortDesc,
-  } = note;
 
+  const { title, imgUrl, fileUrl, category, description: shortDesc } = note;
+  // console.log(note);
+  if (isLoading) {
+    return <div> Loadinng....</div>;
+  }
   return (
-    <Helmet title={title && "notes"}>
-      <CommentSection title={title && "notes"} />
+    <Helmet title={note?.title}>
+      <CommentSection title={note?.title} />
       <section className="pt-0">
         <Container>
           <Row>
@@ -143,7 +141,7 @@ const NoteDetails = () => {
                 </div>
                 <div className="d-flex align-items-center gap-5">
                   <span className="product__price">${"FREE"}</span>
-                  <span>Category: {categoryTitle}</span>
+                  <span>Category: {category?.title}</span>
                 </div>
                 <p className="my-3">{shortDesc}</p>
                 <motion.button

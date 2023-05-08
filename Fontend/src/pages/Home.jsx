@@ -19,13 +19,12 @@ const Home = () => {
   const dispatch = useDispatch();
   const [bcaNotes, setBcaNotes] = useState([]);
   const [bitNotes, setBitNotes] = useState([]);
-  const [bbtNotes, setBbmNotes] = useState([]);
+  const [bbmNotes, setBbmNotes] = useState([]);
   const [bbaNotes, setBbaNotes] = useState([]);
   const [trendingNotes, setTrendingNotes] = useState([]);
 
   const year = new Date().getFullYear();
 
-  //   const filteredTrendingProducts = products.filter(
   //     (item) => item.category === "chair"
   //   );
   //   setTrendingNotes([
@@ -72,19 +71,28 @@ const Home = () => {
   // console.log(notes);
 
   useEffect(() => {
-    const filteredBcaNotes = notes.filter((item) => item.category === "BCA");
+    const filteredBcaNotes = notes.filter(
+      (item) => item.category.title === "BCA" && item.noteStatus === "accept"
+    );
     const filteredBbaNotes = notes.filter(
-      (item) => item.category.title === "BBM"
+      (item) => item.category.title === "BBA" && item.noteStatus === "accept"
     );
     const filteredBitNotes = notes.filter(
-      (item) => item.category.title === "BIT"
+      (item) => item.category.title === "BIT" && item.noteStatus === "accept"
+    );
+    const filteredBbmNotes = notes.filter(
+      (item) => item.category.title === "BBM" && item.noteStatus === "accept"
     );
     // console.log(filteredBbaNotes);
     setBcaNotes(filteredBcaNotes);
     setBbaNotes(filteredBbaNotes);
-
+    setBbmNotes(filteredBbmNotes);
     setBitNotes(filteredBitNotes);
   }, [notes]);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <Helmet title={"Home"}>
@@ -121,48 +129,56 @@ const Home = () => {
         </Container>
       </section>
       <Services />
-      <section className="trending__notes">
-        <Container>
-          <Row>
-            <Col lg="12" className="text-center">
-              <h2 className="section__title">Trending Notes</h2>
-            </Col>
-            {/* <NoteList data={trendingNotes} /> */}
-          </Row>
-        </Container>
-      </section>
-      {/* <section className="bca__notes ">
-        <Container>
-          <Row>
-            <Col lg="12" className="text-center">
-              <h2 className="section__title mb-5">BCA Notes</h2>
-            </Col>
-            <NoteList data={bcaNotes} />
-          </Row>
-        </Container>
-      </section>
-      <section className="bit__notes ">
-        <Container>
-          <Row>
-            <Col lg="12" className="text-center">
-              <h2 className="section__title mb-5">BIT Notes</h2>
-            </Col>
-            <NoteList data={trendingNotes} />
-          </Row>
-        </Container>
-      </section> */}
-      <section className="bit__notes ">
-        <Container>
-          <Row>
-            <Col lg="12" className="text-center">
-              <h2 className="section__title mb-5">BIT Notes</h2>
-            </Col>
-            <NoteList data={bbaNotes} />
-          </Row>
-        </Container>
-      </section>
+      {bbmNotes.length > 0 && (
+        <section className="bit__notes ">
+          <Container>
+            <Row>
+              <Col lg="12" className="text-center">
+                <h2 className="section__title mb-5">BBM Notes</h2>
+              </Col>
+              <NoteList data={bbmNotes} />
+            </Row>
+          </Container>
+        </section>
+      )}
+
+      {bcaNotes.length > 0 && (
+        <section className="bca__notes ">
+          <Container>
+            <Row>
+              <Col lg="12" className="text-center">
+                <h2 className="section__title mb-5">BCA Notes</h2>
+              </Col>
+              <NoteList data={bcaNotes} />
+            </Row>
+          </Container>
+        </section>
+      )}
+      {bcaNotes.length > 0 && (
+        <section className="bca__notes ">
+          <Container>
+            <Row>
+              <Col lg="12" className="text-center">
+                <h2 className="section__title mb-5">BCA Notes</h2>
+              </Col>
+              <NoteList data={bcaNotes} />
+            </Row>
+          </Container>
+        </section>
+      )}
     </Helmet>
   );
 };
 
 export default Home;
+
+// <section className="trending__notes">
+// <Container>
+//   <Row>
+//     <Col lg="12" className="text-center">
+//       <h2 className="section__title">Trending Notes</h2>
+//     </Col>
+//     {/* <NoteList data={trendingNotes} /> */}
+//   </Row>
+// </Container>
+// </section>

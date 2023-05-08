@@ -8,7 +8,7 @@ const NoteApprove = () => {
   const dispatch = useDispatch();
   const [filteredNotes, setFilteredNotes] = useState([]);
 
-  const { notes } = useSelector((state) => state.note);
+  const { notes, isLoading } = useSelector((state) => state.note);
   const handleStatusChange = async (id, status) => {
     // console.log(id, status);
     const res = await axios.patch(`/notes/${id}`, {
@@ -23,7 +23,11 @@ const NoteApprove = () => {
     const noteData = notes.filter((note) => note.noteStatus === "reviewing");
     setFilteredNotes(noteData);
   }, []);
+
   console.log(filteredNotes);
+  if (isLoading) {
+    return <div> Loading ...</div>;
+  }
   return (
     <>
       <Container>
@@ -93,27 +97,6 @@ const NoteApprove = () => {
                         </td>
                       </tr>
                     ))}
-                    {/* {categories?.map((category, index) => (
-                      <tr key={category?._id}>
-                        <td>{index + 1}</td>
-                        <td>{category?.title}</td>
-                        <td>
-                          <motion.span whileTap={{ scale: 1.4 }}>
-                            <i
-                              onClick={() => {
-                                handleRemove(category._id);
-                              }}
-                              className="ri-delete-bin-line text-center"
-                            ></i>
-                          </motion.span>
-                        </td>
-                        <td>
-                          <motion.span whileTap={{ scale: 1.4 }}>
-                            <i className="ri-edit-line"></i>
-                          </motion.span>
-                        </td>
-                      </tr>
-                    ))} */}
                   </tbody>
                 </table>
               )}
