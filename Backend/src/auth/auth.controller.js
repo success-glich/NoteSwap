@@ -10,12 +10,14 @@ const AuthController = {
       );
 
       return res.status(200).json({
+        success: true,
         message: "Login in successfully",
         user: loggedInUser,
         token,
       });
     } catch (err) {
-      return res.status(401).json({
+      return res.status(400).json({
+        success: false,
         message: "Not Authenticated",
         error: err.message,
       });
@@ -31,7 +33,7 @@ const AuthController = {
         user: { email, registerUser },
       });
     } catch (err) {
-      return res.status(400).json({
+      return res.status(404).json({
         message: "there was some error to connect user",
         error: err.message,
       });

@@ -26,7 +26,11 @@ const Login = () => {
         email,
         password,
       });
-      console.log(response);
+      console.log(response.success);
+      if (response.data.success === false) {
+        toast.error("Authentication Failed");
+        return;
+      }
 
       if (response?.status === 200) {
         dispatch(setUserData(response.data));
@@ -37,7 +41,7 @@ const Login = () => {
         toast.error("Authentication Failed");
       }
     } catch (err) {
-      console.log(err);
+      toast.error("Authentication Failed ");
     }
   };
   return (

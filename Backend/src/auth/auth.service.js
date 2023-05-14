@@ -10,7 +10,6 @@ class AuthService {
       console.log(email, password);
 
       const user = await this.User.findOne({ email });
-
       if (!user) {
         throw new Error("Authentication failed");
       }
@@ -19,6 +18,7 @@ class AuthService {
         password,
         user.password
       );
+      console.log(isValidPassword);
       if (!isValidPassword) {
         throw new Error("Authentication failed");
       }
