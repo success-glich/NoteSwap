@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "reactstrap";
-import { fetchNotes } from "../redux/slices/noteSlice";
+import { fetchNotes } from "../../redux/slices/noteSlice";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "../config/axios";
+import axios from "../../config/axios";
 import { toast } from "react-toastify";
 const NoteApprove = () => {
   const dispatch = useDispatch();

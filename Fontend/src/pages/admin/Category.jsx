@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { Form, FormGroup, Row, Col, Container } from "reactstrap";
-import axios from "../config/axios";
+import axios from "../../config/axios";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";

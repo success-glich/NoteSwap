@@ -19,10 +19,6 @@ const nav__links = [
     display: "Notes",
   },
   {
-    path: "favorite",
-    display: "Favorite",
-  },
-  {
     path: "shop",
     display: "Blog",
   },
@@ -90,11 +86,11 @@ const Header = () => {
               </ul>
             </div>
             <div className="nav__icons">
-              <span className="cart__icon" onClick={navigateToCart}>
+              {/* <span className="cart__icon" onClick={navigateToCart}>
                 <i className="ri-heart-line"></i>
 
                 <span className="badge">{totalQuantity}</span>
-              </span>
+              </span> */}
               {isUserLoggedIn ? (
                 <span>
                   <Button

@@ -6,9 +6,12 @@ const RequireAdminAuth = ({ children }) => {
   const location = useLocation();
   console.log(isUserLoggedIn);
   console.log(userData.loggedInUser.role);
-  console.log(isUserLoggedIn);
+  console.log({ isUserLoggedIn });
   if (!isUserLoggedIn) {
     return <Navigate to="/login" state={{ path: location.pathname }} />;
+  }
+  if (userData?.loggedInUser.role !== "ADMIN") {
+    return <Navigate to="/" />;
   }
   return children;
 };

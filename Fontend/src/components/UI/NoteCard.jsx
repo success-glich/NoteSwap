@@ -9,13 +9,11 @@ import { useDispatch } from "react-redux";
 
 import { addItem } from "../../redux/slices/cartSlice";
 const NoteCard = ({ item }) => {
-  // console.log(...item);
-  console.log(item);
   const { _id, title, description, category, imgUrl } = item;
   console.log(imgUrl);
   const addToCart = () => {
     // alert('product added to the cart');
-    toast.success("Product added successfully");
+    toast.success("Notes  added successfully");
   };
   return (
     <Col lg="3" md="4" className="mb-2">
@@ -33,7 +31,7 @@ const NoteCard = ({ item }) => {
           <h3 className="product__name">
             <Link to={`/note/${_id}`}> {title}</Link>{" "}
           </h3>
-          <span> {"BIT"}</span>
+          <span>{category.title} </span>
         </div>
         <div className="note_card-button d-flex align-items-center justify-content-between p-2">
           <span className="price">{"Free download"}</span>

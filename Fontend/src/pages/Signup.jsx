@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import Helmet from "../components/Helmet/Helmet";
 import { Container, Row, Col, Form, FormGroup } from "reactstrap";
 import axios from "../config/axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../styles/login.css";
 
 import { toast } from "react-toastify";
 
 const Signup = () => {
+  const navigation = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -23,8 +24,10 @@ const Signup = () => {
         password,
       });
       // console.log(response.data);
-      if (response.status === 200) toast.success(response?.data?.message);
-      else {
+      if (response.status === 200) {
+        toast.success(response?.data?.message);
+        navigation("/login");
+      } else {
         toast.error(response?.data?.message || "Error to Register");
       }
     } catch (error) {

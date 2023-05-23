@@ -5,56 +5,67 @@ import { Container, Row, Col } from "reactstrap";
 import "../styles/note.css";
 import products from "../assets/data/products";
 import notes from "../assets/data/notes";
-import ProductLists from "../components/UI/NoteList";
+import NoteLists from "../components/UI/NoteList";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 const Shop = () => {
+  const { notes, isLoading } = useSelector((state) => state.note);
+
   const [productsData, setProductsData] = useState(products);
   const [notesData, setNotesData] = useState(notes);
   const handleFilter = (e) => {
     const filterValue = e.target.value;
-    if (filterValue === "sofa") {
-      const filteredProduct = products.filter(
-        (item) => item.category === "sofa"
+    if (filterValue === "bca") {
+      const filteredNotes = notes.filter(
+        (item) => item.category.title === "BCA" && item.noteStatus === "accept"
       );
-      setProductsData(filteredProduct);
+
+      setNotesData(filteredNotes);
     }
-    if (filterValue === "mobile") {
-      const filteredProduct = products.filter(
-        (item) => item.category === "mobile"
+    if (filterValue === "bit") {
+      // alert("invoke");
+      const filteredNotes = notes.filter(
+        (item) => item.category.title === "BIT" && item.noteStatus === "accept"
       );
-      setProductsData(filteredProduct);
+      console.log(filteredNotes);
+      setNotesData(filteredNotes);
     }
-    if (filterValue === "chair") {
-      const filteredProduct = products.filter(
-        (item) => item.category === "chair"
+    if (filterValue === "bbm") {
+      const filteredNotes = notes.filter(
+        (item) => item.category.title === "BBM" && item.noteStatus === "accept"
       );
-      setProductsData(filteredProduct);
+      setNotesData(filteredNotes);
     }
-    if (filterValue === "wireless") {
-      const filteredProduct = products.filter(
-        (item) => item.category === "wireless"
+    if (filterValue === "bim") {
+      const filteredNotes = notes.filter(
+        (item) => item.category.title === "BBM" && item.noteStatus === "accept"
       );
-      setProductsData(filteredProduct);
+      setNotesData(filteredNotes);
     }
-    if (filterValue === "watch") {
-      const filteredProduct = products.filter(
-        (item) => item.category === "watch"
-      );
-      setProductsData(filteredProduct);
+  };
+  const handleSorting = (e) => {
+    const filterValue = e.target.value;
+    if (filterValue === "ascending") {
+      alert("ascending boy");
+      // notesData.sort((a, b) => a.title - b.title);
+    }
+    if (filterValue === "descending") {
+      alert("descending");
     }
   };
   const handleSearch = (e) => {
     const searchItem = e.target.value;
 
-    const searchedProducts = products.filter((item) =>
-      item.productName.toLowerCase().includes(searchItem.toLowerCase())
+    const searchedProducts = notes.filter((note) =>
+      note.title.toLowerCase().includes(searchItem.toLowerCase())
     );
-    setProductsData(searchedProducts);
+    setNotesData(searchedProducts);
   };
+
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [products]);
+  }, [notes]);
   return (
     <Helmet title="shop">
       <CommentSection title="Notes" />
@@ -65,10 +76,10 @@ const Shop = () => {
               <div className="filter__widget">
                 <select name="" id="" onChange={handleFilter}>
                   <option>Filter By Category</option>
-                  <option value="sofa">BCA</option>
-                  <option value="mobile">BIT</option>
-                  <option value="chair">BIM</option>
-                  <option value="watch">Class 10</option>
+                  <option value="bca">BCA</option>
+                  <option value="bbm">BBM</option>
+                  <option value="bit">BIT</option>
+                  <option value="bim">BIM</option>
                 </select>
               </div>
             </Col>
@@ -83,7 +94,7 @@ const Shop = () => {
 
             <Col md="3" lg={4} className="text-end">
               <div className="filter__widget">
-                <select name="" id="">
+                <select name="" id="" onChange={handleSorting}>
                   <option>Sort By Category</option>
                   <option value="ascending">Ascending</option>
                   <option value="descending">Descending</option>
@@ -112,9 +123,9 @@ const Shop = () => {
         <Container>
           <Row>
             {notesData.length === 0 ? (
-              <h1 className="text-center">No Products are found !</h1>
+              <h1 className="text-center">Notes are not found !</h1>
             ) : (
-              <ProductLists data={notes} />
+              <NoteLists data={notesData} />
             )}
           </Row>
         </Container>

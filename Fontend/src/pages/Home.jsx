@@ -5,14 +5,12 @@ import "../styles/home.css";
 import heroImg from "../assets/image/hero.png";
 
 import { motion } from "framer-motion";
-import products from "../assets/data/products";
 import Services from "../services/Servics";
 import counterImg from "../assets/images/counter-timer-img.png";
 import { Container, Row, Col } from "reactstrap";
 import { Link } from "react-router-dom";
 import { fetchNotes } from "../redux/slices/noteSlice";
 import NoteList from "../components/UI/NoteList";
-import Clock from "../components/UI/Clock";
 import { useDispatch, useSelector } from "react-redux";
 
 const Home = () => {
@@ -68,13 +66,13 @@ const Home = () => {
   useEffect(() => {
     dispatch(fetchNotes());
   }, []);
-  // console.log(notes);
 
   useEffect(() => {
-    const filteredBcaNotes = notes.filter(
+    const filteredBcaNotes = notes?.filter(
       (item) => item.category.title === "BCA" && item.noteStatus === "accept"
     );
-    const filteredBbaNotes = notes.filter(
+    // constfilteredBbaNotes = [];/
+    const filteredBbaNotes = notes?.filter(
       (item) => item.category.title === "BBA" && item.noteStatus === "accept"
     );
     const filteredBitNotes = notes.filter(
@@ -142,18 +140,6 @@ const Home = () => {
         </section>
       )}
 
-      {bcaNotes.length > 0 && (
-        <section className="bca__notes ">
-          <Container>
-            <Row>
-              <Col lg="12" className="text-center">
-                <h2 className="section__title mb-5">BCA Notes</h2>
-              </Col>
-              <NoteList data={bcaNotes} />
-            </Row>
-          </Container>
-        </section>
-      )}
       {bcaNotes.length > 0 && (
         <section className="bca__notes ">
           <Container>

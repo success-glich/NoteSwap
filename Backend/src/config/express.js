@@ -2,8 +2,8 @@ const express = require("express");
 const routes = require("../router");
 const path = require("path");
 const cors = require("cors");
-
 const app = express();
+// const passportSetup = require("./passport")x;
 
 app.use(cors());
 

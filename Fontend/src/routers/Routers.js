@@ -7,18 +7,16 @@ import Checkout from "../pages/Checkout";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 import NoteDetails from "../pages/NoteDetails";
-import Favorite from "../pages/Favorite";
 import AddNote from "../pages/AddNote";
 import PageNotFound from "../pages/404Page";
-import AddNotes from "../admin/AddNotes";
-import AllNotes from "../admin/AllNotes";
-import ProtectedRoute from "./ProtectedRoute";
-import Dashboard from "../admin/Dashboard";
-import Category from "../admin/Category";
-import NoteApprove from "../admin/NoteApprove";
-import User from "../admin/User";
+// import AddNotes from "../pages/admin/AddNotes";
+import AllNotes from "../pages/admin/AllNotes";
+import Dashboard from "../pages/admin/Dashboard";
+import Category from "../pages/admin/Category";
+import NoteApprove from "../pages/admin/NoteApprove";
 import RequireAuth from "../auth/RequireAuth";
-
+import RequireAdminAuth from "../auth/RequireAdminAuth";
+import User from "../pages/admin/User";
 const Routers = () => {
   return (
     <Routes>
@@ -26,7 +24,6 @@ const Routers = () => {
       <Route path="home" element={<Home />} />
       <Route path="note" element={<Note />} />
       <Route path="note/:id" element={<NoteDetails />} />
-      <Route path="favorite" element={<Favorite />} />
       <Route
         path="add-note"
         element={
@@ -39,12 +36,16 @@ const Routers = () => {
       <Route path="login" element={<Login />} />
       <Route path="signup" element={<Signup />} />
       <Route path="*" element={<PageNotFound />} />
+
       <Route
         path="dashboard"
         element={
-          <RequireAuth>
-            <Dashboard />
-          </RequireAuth>
+          <>
+            <RequireAdminAuth>
+              {" "}
+              <Dashboard />
+            </RequireAdminAuth>
+          </>
         }
       >
         <Route path="all-notes" element={<AllNotes />} />
